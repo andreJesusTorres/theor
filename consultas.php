@@ -33,21 +33,27 @@ function listarSesion()
         if (mysqli_num_rows($consulta) > 0) {
             while ($datos = mysqli_fetch_assoc($consulta)) {
                 echo '
-                <tr>
-                    <th scope="row">' . $datos["codigo"] . '</th>
-                    <td>' . $datos["categoria"] . '</td>
-                    <td>' . $datos["fechaAlta"] . '</td>
-                    <td>' . $datos["nombre"] . '</td>
-                    <td>' . $datos["precio"] . ' x kg</td>
-                    <td>' . $datos["estado"] . '</td>
-                    <td>
-                        <form method="GET" action="editar.php">
-                            <button class="btn btn-sm btn-outline-dark" name="codigo" value="' . $datos["codigo"] . '">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
+                    <tr>
+                        <th scope="row">' . $datos["codigo"] . '</th>
+                        <td>' . $datos["categoria"] . '</td>
+                        <td>' . $datos["fechaAlta"] . '</td>
+                        <td>' . $datos["nombre"] . '</td>
+                        <td>' . $datos["precio"] . ' x kg</td>
+                        <td>' . $datos["estado"] . '</td>
+                        <td>
+                            <form method="GET" action="editar.php">
+                                <button class="btn btn-sm btn-outline-dark" name="codigo" value="' . $datos["codigo"] . '">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="POST" action="eliminar.php">
+                                <input type="hidden" name="codigo" value="' . $datos["codigo"] . '">
+                                <button class="btn btn-sm btn-outline-danger" name="botonEliminar">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
                 ';
             }
         }

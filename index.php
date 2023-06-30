@@ -57,6 +57,19 @@ require_once("consultas.php");
     $conexion = conectar();
     if ($conexion != null) {
         echo '
+        <style>
+            .container-fluid {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .table-responsive {
+                margin: 0 auto;
+            }
+            .table td,
+            .table th {
+                text-align: center;
+            }
+        </style>
         <div class="container-fluid">
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -86,6 +99,7 @@ require_once("consultas.php");
         </div>';
     }
     ?>
+
 
     <script src="js/bootstrap.bundle.js"></script>
 </body>

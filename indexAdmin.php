@@ -43,39 +43,53 @@ require_once("consultas.php");
 		</div>
 	</nav>
 
-	<?php 
-	$conexion = conectar();
-	if ($conexion != null) {
-		echo '
-		<div class="container-fluid">
-			<div class="table-responsive">
-				<table class="table table-striped">
-					<thead class="thead-dark">
-						<tr>
-							<th scope="col">Código</th>
-							<th scope="col">Categoría</th>
-							<th scope="col">Fecha</th>
-							<th scope="col">Nombre</th>
-							<th scope="col">Precio</th>
-							<th scope="col">Estado</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>';
-			
-			if (isset($_GET["botonBuscar"])) {
-				$busqueda = $_GET["inputBuscar"];
-				buscarProductosAdmin($busqueda);
-			} else {
-				listarSesion();
-			}
+	<?php
+    $conexion = conectar();
+    if ($conexion != null) {
+        echo '
+        <style>
+            .container-fluid {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .table-responsive {
+                margin: 0 auto;
+            }
+            .table td,
+            .table th {
+                text-align: center;
+            }
+        </style>
+        <div class="container-fluid">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Categoría</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Estado</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>';
 
-			echo '        
-					</tbody>
-				</table>
-			</div>
-		</div>';
-	}
+        if (isset($_GET["botonBuscar"])) {
+            $busqueda = $_GET["inputBuscar"];
+            buscarProductosAdmin($busqueda);
+        } else {
+            listarSesion();
+        }
+
+        echo '
+                    </tbody>
+                </table>
+            </div>
+        </div>';
+    }
 	?>
+
 
 	<script src="js/bootstrap.bundle.js"></script>
