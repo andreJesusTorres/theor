@@ -57,19 +57,20 @@ require_once("consultas.php");
     $conexion = conectar();
     if ($conexion != null) {
         echo '
-        <div class="container" style="height: 80vh;">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Código</th>
-                        <th scope="col">Categoría</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Precio</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>';
+        <div class="container-fluid">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Categoría</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>';
 
         if (isset($_GET["botonBuscar"])) {
             $busqueda = $_GET["inputBuscar"];
@@ -79,8 +80,9 @@ require_once("consultas.php");
         }
 
         echo '
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>';
     }
     ?>
