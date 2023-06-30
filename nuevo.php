@@ -20,7 +20,8 @@ require("consultas.php");
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <img src="img/almacen.png" style="width: 100%;" alt="Almacén 'El Pepe'">
+        <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
             <div class="container-fluid">
                 <img src="img/pepe-argento.png" alt="Logo del Almacén 'El Pepe'">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,6 +48,14 @@ require("consultas.php");
             </div>
         </nav>
     <form method="POST">
+        <?php
+        if(isset($guardado)){
+            echo '<div class="alert alert-dismissible alert-success">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>Guardado exitoso!</strong> El producto se guardó correctamente.
+                </div>';
+        }
+        ?>
         <div class="container col-6">
         <div class="mb-3">
             <label class="form-label">Código</label>
@@ -73,14 +82,6 @@ require("consultas.php");
             <input type="text" name="inputEstado" class="form-control" placeholder="Estado del producto" required>
         </div>
         </div>
-        <?php
-        if(isset($guardado)){
-            echo '<div class="alert alert-dismissible alert-success">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <strong>Guardado exitoso!</strong> El producto se guardó correctamente.
-                </div>';
-        }
-        ?>
         <div class="d-flex justify-content-center mt-2">
             <div style="margin-right: 10%;">
                 <a class="btn btn-lg btn-outline-primary" href="http://localhost/incuyo/Crud%20almacen%2023-6/">Volver</a>

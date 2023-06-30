@@ -25,7 +25,8 @@ if (!isset($_GET["codigo"])) {
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <img src="img/almacen.png" style="width: 100%;" alt="Almacén 'El Pepe'">
+    <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
         <div class="container-fluid">
             <img src="img/pepe-argento.png" alt="Logo del Almacén 'El Pepe'">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,6 +57,12 @@ if (!isset($_GET["codigo"])) {
     </nav>
 
     <form method="POST">
+        <?php if (isset($guardado)) : ?>
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Guardado exitoso!</strong> El producto se modificó correctamente.
+            </div>
+        <?php endif; ?>
         <div class="container col-6">
             <div class="mb-3">
                 <label class="form-label">Código</label>
@@ -82,12 +89,6 @@ if (!isset($_GET["codigo"])) {
                 <input type="text" name="inputEstado" class="form-control" placeholder="Estado del producto" required>
             </div>
         </div>
-        <?php if (isset($guardado)) : ?>
-            <div class="alert alert-dismissible alert-success">
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                <strong>Guardado exitoso!</strong> El producto se modificó correctamente.
-            </div>
-        <?php endif; ?>
         <div class="d-flex justify-content-center mt-2">
             <div style="margin-right: 10%;">
                 <a class="btn btn-lg btn-outline-primary" href="indexAdmin.php">Volver</a>

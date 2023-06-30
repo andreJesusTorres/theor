@@ -168,8 +168,8 @@ if (isset($_POST["login"])) {
         header("Location: indexAdmin.php");
         exit();
     } else {
+        echo "Nombre de usuario o contraseña incorrectos.";
         exit();
-        
     }
 }
 ?>

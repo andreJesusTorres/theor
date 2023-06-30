@@ -4,7 +4,6 @@ require_once("consultas.php");
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +13,9 @@ require_once("consultas.php");
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    
+    <img src="img/almacen.png" style="width: 100%;" alt="Almacén 'El Pepe'">
+    <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
         <div class="container-fluid">
             <img src="img/pepe-argento.png" alt="Logo del Almacén 'El Pepe'">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +24,7 @@ require_once("consultas.php");
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php">Home
+                        <a class="nav-link active mr-3" href="index.php">Home
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
@@ -86,5 +87,4 @@ require_once("consultas.php");
 
     <script src="js/bootstrap.bundle.js"></script>
 </body>
-
 </html>
