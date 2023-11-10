@@ -16,6 +16,7 @@ function listar()
                     <td>' . $datos["fechaAlta"] . '</td>
                     <td>' . $datos["nombre"] . '</td>
                     <td>' . $datos["precio"] . ' x kg</td>
+                    <td><img src="' . $datos["imagen"] . '" alt="Producto"></td>
                 </tr>
                 ';
             }
@@ -40,6 +41,13 @@ function listarSesion()
                         <td>' . $datos["nombre"] . '</td>
                         <td>' . $datos["precio"] . ' x kg</td>
                         <td>' . $datos["estado"] . '</td>
+                        <td>';
+                
+                if (!empty($datos["imagen"])) {
+                    echo '<img src="' . $datos["imagen"] . '" alt="Imagen del producto" style="max-width: 50px; max-height: 50px;">';
+                }
+                
+                echo '</td>
                         <td>
                             <form method="GET" action="editar.php">
                                 <button class="btn btn-sm btn-outline-dark" name="codigo" value="' . $datos["codigo"] . '">
@@ -61,6 +69,7 @@ function listarSesion()
     }
 }
 
+
 function logout()
 {
     session_destroy();
@@ -78,22 +87,27 @@ function buscarProductos($busqueda)
         $consulta = mysqli_query($conexion, $sql);
         if (mysqli_num_rows($consulta) > 0) {
             while ($datos = mysqli_fetch_assoc($consulta)) {
-                echo '
-                <tr>
-                    <th scope="row">' . $datos["codigo"] . '</th>
-                    <td>' . $datos["categoria"] . '</td>
-                    <td>' . $datos["fechaAlta"] . '</td>
-                    <td>' . $datos["nombre"] . '</td>
-                    <td>' . $datos["precio"] . ' x kg</td>
-                    <td>' . $datos["estado"] . '</td>                   
-                </tr>';
+                echo '<tr>';
+                echo '<th scope="row">' . $datos["codigo"] . '</th>';
+                echo '<td>' . $datos["categoria"] . '</td>';
+                echo '<td>' . $datos["fechaAlta"] . '</td>';
+                echo '<td>' . $datos["nombre"] . '</td>';
+                echo '<td>' . $datos["precio"] . ' x kg</td>';
+                echo '<td>' . $datos["estado"] . '</td>';
+                echo '<td>';
+                if (!empty($datos["imagen"])) {
+                    echo '<img src="' . $datos["imagen"] . '" alt="Imagen del producto" style="max-width: 50px; max-height: 50px;">';
+                }
+                echo '</td>';
+                echo '</tr>';
             }
         } else {
-            echo '<tr><td colspan="6">No se encontraron resultados.</td></tr>';
+            echo '<tr><td colspan="7">No se encontraron resultados.</td></tr>';
         }
         mysqli_close($conexion);
     }
 }
+
 
 function buscarProductosAdmin($busqueda)
 {
@@ -111,6 +125,7 @@ function buscarProductosAdmin($busqueda)
                     <td>' . $datos["nombre"] . '</td>
                     <td>' . $datos["precio"] . ' x kg</td>
                     <td>' . $datos["estado"] . '</td>
+                    <td><img src="' . $datos["imagen"] . '" alt="Imagen del producto" style="max-width: 50px;"></td>
                     <td>
                         <form method="GET" action="editar.php">
                             <button class="btn btn-sm btn-outline-dark" name="codigo" value="' . $datos["codigo"] . '">
@@ -121,7 +136,7 @@ function buscarProductosAdmin($busqueda)
                 </tr>';
             }
         } else {
-            echo '<tr><td colspan="6">No se encontraron resultados.</td></tr>';
+            echo '<tr><td colspan="7">No se encontraron resultados.</td></tr>';
         }
         mysqli_close($conexion);
     }
@@ -134,7 +149,17 @@ if (isset($_POST["botonModificar"])) {
     $nombre = $_POST["inputNombre"];
     $precio = $_POST["inputPrecio"];
     $estado = $_POST["inputEstado"];
-    $sql = "UPDATE productos SET categoria='$categoria', fechaAlta='$fechaAlta', nombre='$nombre', precio='$precio', estado='$estado' WHERE codigo='$codigo'";
+    $imagen = $_FILES["inputImagen"]["name"]; 
+    $imagen_temporal = $_FILES["inputImagen"]["tmp_name"]; 
+
+    if (!empty($imagen)) {
+        $ruta_destino = "img/" . $imagen;
+        move_uploaded_file($imagen_temporal, $ruta_destino);
+        $sql = "UPDATE productos SET categoria='$categoria', fechaAlta='$fechaAlta', nombre='$nombre', precio='$precio', estado='$estado', imagen='$ruta_destino' WHERE codigo='$codigo'";
+    } else {
+         $sql = "UPDATE productos SET categoria='$categoria', fechaAlta='$fechaAlta', nombre='$nombre', precio='$precio', estado='$estado' WHERE codigo='$codigo'";
+    }
+
     $conexion = conectar();
     $modificar = mysqli_query($conexion, $sql);
 
@@ -152,16 +177,23 @@ if (isset($_POST["botonGuardar"])) {
     $nombre = $_POST["inputNombre"];
     $precio = $_POST["inputPrecio"];
     $estado = $_POST["inputEstado"];
-    $sql = "INSERT INTO productos (categoria, nombre, precio, estado) VALUES ('$categoria', '$nombre', '$precio', '$estado')";
+    $imagen = $_FILES["inputImagen"]["name"];
+    $imagen_temporal = $_FILES["inputImagen"]["tmp_name"]; 
+
+    $ruta_destino = "img/" . $imagen;
+    move_uploaded_file($imagen_temporal, $ruta_destino);
+
+    $sql = "INSERT INTO productos (categoria, nombre, precio, estado, imagen) VALUES ('$categoria', '$nombre', '$precio', '$estado', '$ruta_destino')";
     $guardar = mysqli_query($conexion, $sql);
+
     if (!$guardar) {
         echo "Se ha producido algún error";
     } else {
         $guardado = "exitoso";
     }
+
     mysqli_close($conexion);
 }
-
 if (isset($_POST["login"])) {
     $usuario = $_POST["usuario"];
     $clave = $_POST["clave"];

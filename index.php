@@ -80,6 +80,7 @@ require_once("consultas.php");
                             <th scope="col">Fecha</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Precio</th>
+                            <th scope="col">Imagen</th>
                             <th></th>
                         </tr>
                     </thead>

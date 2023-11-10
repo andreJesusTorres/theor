@@ -56,14 +56,14 @@ if (!isset($_GET["codigo"])) {
         </div>
     </nav>
 
-    <form method="POST">
+    <form method="POST" enctype='multipart/form-data'>
         <?php if (isset($guardado)) : ?>
             <div class="alert alert-dismissible alert-success">
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 <strong>Guardado exitoso!</strong> El producto se modificó correctamente.
             </div>
         <?php endif; ?>
-        <div class="container col-6">
+        <div class="container col-6" >
             <div class="mb-3">
                 <label class="form-label">Código</label>
                 <input type="text" name="inputCodigo" class="form-control" placeholder="Código del producto" value="<?php echo $_GET['codigo']; ?>" readonly="">
@@ -87,6 +87,10 @@ if (!isset($_GET["codigo"])) {
             <div>
                 <label class="form-label">Estado</label>
                 <input type="text" name="inputEstado" class="form-control" placeholder="Estado del producto" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Imagen</label>
+                <input type="file" name="inputImagen" class="form-control" accept="image/*" required>
             </div>
         </div>
         <div class="d-flex justify-content-center mt-2">

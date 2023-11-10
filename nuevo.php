@@ -81,6 +81,9 @@ require("consultas.php");
             <label class="form-label">Estado</label>
             <input type="text" name="inputEstado" class="form-control" placeholder="Estado del producto" required>
         </div>
+        <div class="mb-3">
+            <label class="form-label">Imagen</label>
+            <input type="file" name="inputImagen" class="form-control" accept="image/*" required>
         </div>
         <div class="d-flex justify-content-center mt-2">
             <div style="margin-right: 10%;">

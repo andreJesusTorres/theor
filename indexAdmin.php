@@ -59,6 +59,10 @@ require_once("consultas.php");
             .table th {
                 text-align: center;
             }
+            .table img {
+                max-width: 50px;
+                max-height: 50px;
+            }
         </style>
         <div class="container-fluid">
             <div class="table-responsive">
@@ -71,6 +75,7 @@ require_once("consultas.php");
                             <th scope="col">Nombre</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Estado</th>
+                            <th scope="col">Imagen</th>
                             <th></th>
                         </tr>
                     </thead>
