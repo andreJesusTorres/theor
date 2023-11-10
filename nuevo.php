@@ -47,7 +47,7 @@ require("consultas.php");
                 </div>
             </div>
         </nav>
-    <form method="POST">
+    <form method="POST" enctype='multipart/form-data'>
         <?php
         if(isset($guardado)){
             echo '<div class="alert alert-dismissible alert-success">
@@ -84,6 +84,10 @@ require("consultas.php");
         <div class="mb-3">
             <label class="form-label">Imagen</label>
             <input type="file" name="inputImagen" class="form-control" accept="image/*" required>
+        </div>
+        <div class="mb-3">
+            <label for="enlace">Haz clic para descargar las imagenes</label>
+            <a id="enlace" href="https://icons8.com/icon/set/Emoji/emoji" target="_blank">Enlace</a>
         </div>
         <div class="d-flex justify-content-center mt-2">
             <div style="margin-right: 10%;">

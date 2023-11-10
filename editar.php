@@ -92,9 +92,13 @@ if (!isset($_GET["codigo"])) {
                 <label class="form-label">Imagen</label>
                 <input type="file" name="inputImagen" class="form-control" accept="image/*" required>
             </div>
+            <div class="mb-3">
+                <label for="enlace">Haz clic para descargar las imagenes</label>
+                <a id="enlace" href="https://icons8.com/icon/set/Emoji/emoji" target="_blank">Enlace</a>
+            </div>
         </div>
         <div class="d-flex justify-content-center mt-2">
-            <div style="margin-right: 10%;">
+            <div style="margin-right:a 10%;">
                 <a class="btn btn-lg btn-outline-primary" href="indexAdmin.php">Volver</a>
             </div>
             <div>
