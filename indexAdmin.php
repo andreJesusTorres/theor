@@ -33,6 +33,9 @@ require_once("consultas.php");
                         <a class="nav-link" href="nuevo.php">Agregar producto</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="indexAdmin.php?gestionarUsuarios">Gestionar Usuarios</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" href="index.php" onclick="cerrarSesion()">Cerrar Sesión
                             <span class="visually-hidden">(current)</span>
                         </a>
@@ -48,7 +51,64 @@ require_once("consultas.php");
 
     <?php
     $conexion = conectar();
+
     if ($conexion != null) {
+        echo '
+        <style>
+            .container-fluid {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .table-responsive {
+                margin: 0 auto;
+            }
+            .table td,
+            .table th {
+                text-align: center;
+            }
+            .table img {
+                max-width: 50px;
+                max-height: 50px;
+            }
+        </style>
+        <div class="container-fluid">';
+
+        if (!isset($_GET["gestionarUsuarios"])) {
+            echo '
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Categoría</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Imagen</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>';
+
+            if (isset($_GET["botonBuscar"])) {
+                $busqueda = $_GET["inputBuscar"];
+                buscarProductosAdmin($busqueda);
+            } else {
+                listarSesion();
+            }
+
+            echo '
+                    </tbody>
+                </table>
+            </div>';
+        }
+
+        echo '</div>';
+    }
+
+    if (isset($_GET["gestionarUsuarios"])) {
         echo '
         <style>
             .container-fluid {
@@ -72,33 +132,53 @@ require_once("consultas.php");
                 <table class="table table-striped">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Código</th>
-                            <th scope="col">Categoría</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col">Imagen</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Usuario</th>
+                            <th scope="col">Clave</th>
+                            <th></th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>';
 
-        if (isset($_GET["botonBuscar"])) {
-            $busqueda = $_GET["inputBuscar"];
-            buscarProductosAdmin($busqueda);
-        } else {
-            listarSesion();
-        }
+        listarUsuarios();
 
         echo '
-                    </tbody>
-                </table>
-            </div>
-        </div>';
+                </tbody>
+            </table>
+        </div>
+    </div>';
     }
     ?>
 
+    <script>
+        function editarUsuario(id) {
+            window.location.href = 'editarUsuario.php?id=' + id;
+        }
 
-    <script src="js/bootstrap.bundle.js"></script>
+        function eliminarUsuario(id) {
+            var confirmacion = confirm('¿Realmente desea eliminar este usuario?');
+            if (confirmacion) {
+                eliminarUsuarioServidor(id);
+            }
+        }
+
+        function eliminarUsuarioServidor(id) {
+            fetch(`eliminarUsuario.php?id=${id}`, { method: 'DELETE' })
+                .then(response => response.ok ? response.text() : Promise.reject('Error al eliminar el usuario.'))
+                .then(data => {
+                    alert(`Usuario eliminado con éxito. ID: ${id}`);
+                    // Aquí puedes redirigir o realizar otras acciones necesarias
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Hubo un error al eliminar el usuario.');
+                });
+        }
+    </script>
+
+
+
+</body>
+
+</html>

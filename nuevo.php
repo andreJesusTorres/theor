@@ -40,6 +40,12 @@ require("consultas.php");
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="nuevo.php">Agregar producto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="indexAdmin.php?gestionarUsuarios">Gestionar Usuarios</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link active" href="index.php" onclick="cerrarSesion()">Cerrar Sesión
                                 <span class="visually-hidden">(current)</span>
                             </a>
@@ -47,7 +53,7 @@ require("consultas.php");
                     </ul>
                     <form class="d-flex">
                         <input class="form-control me-sm-2" type="search" name="inputBuscar" placeholder="Buscar">
-                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+                        <button class="btn btn-secondary my-2 my-sm-0" type="submit" name="botonBuscar">Buscar</button>
                     </form>
                 </div>
             </div>
@@ -92,6 +98,10 @@ require("consultas.php");
                         required>
                 </div>
                 <div class="mb-3">
+                    <label class="form-label">Cantidad</label>
+                    <input type="text" name="inputCantidad" class="form-control" placeholder="Cantidad del producto">
+                </div>
+                <div class="mb-3">
                     <label class="form-label">Imagen</label>
                     <input type="file" name="inputImagen" class="form-control" accept="image/*" required>
                 </div>
@@ -101,8 +111,7 @@ require("consultas.php");
                 </div>
                 <div class="d-flex justify-content-center mt-2">
                     <div style="margin-right: 10%;">
-                        <a class="btn btn-lg btn-outline-primary"
-                            href="http://localhost/incuyo/Crud%20almacen%2023-6/">Volver</a>
+                        <a class="btn btn-lg btn-outline-primary" href="indexAdmin.php">Volver</a>
                     </div>
                     <div>
                         <button class="btn btn-lg btn-outline-primary" name="botonGuardar">Guardar</button>
