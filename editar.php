@@ -29,7 +29,8 @@ if (!isset($_GET["codigo"])) {
     <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
         <div class="container-fluid">
             <img src="img/pepe-argento.png" alt="Logo del Almacén 'El Pepe'">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarColor01">
@@ -57,20 +58,22 @@ if (!isset($_GET["codigo"])) {
     </nav>
 
     <form method="POST" enctype='multipart/form-data'>
-        <?php if (isset($guardado)) : ?>
+        <?php if (isset($guardado)): ?>
             <div class="alert alert-dismissible alert-success">
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 <strong>Guardado exitoso!</strong> El producto se modificó correctamente.
             </div>
         <?php endif; ?>
-        <div class="container col-6" >
+        <div class="container col-6">
             <div class="mb-3">
                 <label class="form-label">Código</label>
-                <input type="text" name="inputCodigo" class="form-control" placeholder="Código del producto" value="<?php echo $_GET['codigo']; ?>" readonly="">
+                <input type="text" name="inputCodigo" class="form-control" placeholder="Código del producto"
+                    value="<?php echo $_GET['codigo']; ?>" readonly="">
             </div>
             <div class="mb-3">
                 <label class="form-label">Categoría</label>
-                <input type="text" name="inputCategoria" class="form-control" placeholder="Categoría del producto" value="<?php echo $datos["categoria"]; ?>" required>
+                <input type="text" name="inputCategoria" class="form-control" placeholder="Categoría del producto"
+                    value="<?php echo $datos["categoria"]; ?>" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Fecha</label>
@@ -78,11 +81,18 @@ if (!isset($_GET["codigo"])) {
             </div>
             <div class="mb-3">
                 <label class="form-label">Nombre</label>
-                <input type="text" name="inputNombre" class="form-control" placeholder="Nombre del producto" value="<?php echo $datos["nombre"]; ?>" required>
+                <input type="text" name="inputNombre" class="form-control" placeholder="Nombre del producto"
+                    value="<?php echo $datos["nombre"]; ?>" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Precio</label>
-                <input type="text" name="inputPrecio" class="form-control" placeholder="Precio del producto" value="<?php echo $datos["precio"]; ?>" required>
+                <input type="text" name="inputPrecio" class="form-control" placeholder="Precio del producto"
+                    value="<?php echo $datos["precio"]; ?>" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Cantidad</label>
+                <input type="text" name="inputCantidad" class="form-control" placeholder="Cantidad del producto"
+                    value="<?php echo $datos["cantidad"]; ?>" required>
             </div>
             <div>
                 <label class="form-label">Estado</label>

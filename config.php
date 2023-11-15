@@ -1,5 +1,4 @@
-<?php 
-//Configuracion base de datos
+<?php
 define('server', 'localhost');
 define('usuario', 'root');
 define('clave', '');

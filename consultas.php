@@ -5,7 +5,7 @@ function listar()
 {
     $conexion = conectar();
     if ($conexion != null) {
-        $sql = "SELECT * FROM productos WHERE estado=1";
+        $sql = "SELECT * FROM productos WHERE estado=1 ORDER BY categoria ASC, nombre ASC";
         $consulta = mysqli_query($conexion, $sql);
         if (mysqli_num_rows($consulta) > 0) {
             while ($datos = mysqli_fetch_assoc($consulta)) {
@@ -16,6 +16,7 @@ function listar()
                     <td>' . $datos["fechaAlta"] . '</td>
                     <td>' . $datos["nombre"] . '</td>
                     <td>' . $datos["precio"] . ' x kg</td>
+                    <td>' . $datos["cantidad"] . '</td>
                     <td><img src="' . $datos["imagen"] . '" alt="Producto"></td>
                 </tr>
                 ';
@@ -29,7 +30,7 @@ function listarSesion()
 {
     $conexion = conectar();
     if ($conexion != null) {
-        $sql = "SELECT * FROM productos";
+        $sql = "SELECT * FROM productos ORDER BY categoria ASC, nombre ASC";
         $consulta = mysqli_query($conexion, $sql);
         if (mysqli_num_rows($consulta) > 0) {
             while ($datos = mysqli_fetch_assoc($consulta)) {
@@ -40,13 +41,14 @@ function listarSesion()
                         <td>' . $datos["fechaAlta"] . '</td>
                         <td>' . $datos["nombre"] . '</td>
                         <td>' . $datos["precio"] . ' x kg</td>
+                        <td>' . $datos["cantidad"] . '</td>
                         <td>' . $datos["estado"] . '</td>
                         <td>';
-                
+
                 if (!empty($datos["imagen"])) {
                     echo '<img src="' . $datos["imagen"] . '" alt="Imagen del producto" style="max-width: 50px; max-height: 50px;">';
                 }
-                
+
                 echo '</td>
                         <td>
                             <form method="GET" action="editar.php">
@@ -72,11 +74,10 @@ function listarSesion()
 
 function logout()
 {
+    session_start();
     session_destroy();
     header("location:index.php");
-    if(!isset($_SESSION["login"])){
-        header("index.php");
-    }
+    exit();
 }
 
 function buscarProductos($busqueda)
@@ -93,6 +94,7 @@ function buscarProductos($busqueda)
                 echo '<td>' . $datos["fechaAlta"] . '</td>';
                 echo '<td>' . $datos["nombre"] . '</td>';
                 echo '<td>' . $datos["precio"] . ' x kg</td>';
+                echo '<td>' . $datos["cantidad"] . '</td>';
                 echo '<td>' . $datos["estado"] . '</td>';
                 echo '<td>';
                 if (!empty($datos["imagen"])) {
@@ -124,6 +126,7 @@ function buscarProductosAdmin($busqueda)
                     <td>' . $datos["fechaAlta"] . '</td>
                     <td>' . $datos["nombre"] . '</td>
                     <td>' . $datos["precio"] . ' x kg</td>
+                    <td>' . $datos["cantidad"] . '</td>
                     <td>' . $datos["estado"] . '</td>
                     <td><img src="' . $datos["imagen"] . '" alt="Imagen del producto" style="max-width: 50px;"></td>
                     <td>
@@ -149,15 +152,15 @@ if (isset($_POST["botonModificar"])) {
     $nombre = $_POST["inputNombre"];
     $precio = $_POST["inputPrecio"];
     $estado = $_POST["inputEstado"];
-    $imagen = $_FILES["inputImagen"]["name"]; 
-    $imagen_temporal = $_FILES["inputImagen"]["tmp_name"]; 
+    $imagen = $_FILES["inputImagen"]["name"];
+    $imagen_temporal = $_FILES["inputImagen"]["tmp_name"];
 
     if (!empty($imagen)) {
         $ruta_destino = "img/" . $imagen;
         move_uploaded_file($imagen_temporal, $ruta_destino);
         $sql = "UPDATE productos SET categoria='$categoria', fechaAlta='$fechaAlta', nombre='$nombre', precio='$precio', estado='$estado', imagen='$ruta_destino' WHERE codigo='$codigo'";
     } else {
-         $sql = "UPDATE productos SET categoria='$categoria', fechaAlta='$fechaAlta', nombre='$nombre', precio='$precio', estado='$estado' WHERE codigo='$codigo'";
+        $sql = "UPDATE productos SET categoria='$categoria', fechaAlta='$fechaAlta', nombre='$nombre', precio='$precio', estado='$estado' WHERE codigo='$codigo'";
     }
 
     $conexion = conectar();
@@ -178,7 +181,7 @@ if (isset($_POST["botonGuardar"])) {
     $precio = $_POST["inputPrecio"];
     $estado = $_POST["inputEstado"];
     $imagen = $_FILES["inputImagen"]["name"];
-    $imagen_temporal = $_FILES["inputImagen"]["tmp_name"]; 
+    $imagen_temporal = $_FILES["inputImagen"]["tmp_name"];
 
     $ruta_destino = "img/" . $imagen;
     move_uploaded_file($imagen_temporal, $ruta_destino);
@@ -194,23 +197,65 @@ if (isset($_POST["botonGuardar"])) {
 
     mysqli_close($conexion);
 }
+
 if (isset($_POST["login"])) {
     $usuario = $_POST["usuario"];
     $clave = $_POST["clave"];
     $conexion = conectar();
+
     if (!$conexion) {
         die("Error en la conexión: " . mysqli_connect_error());
     }
+
     $sql = "SELECT * FROM login WHERE usuario = '$usuario' AND clave = '$clave'";
     $result = mysqli_query($conexion, $sql);
+
     if ($result && mysqli_num_rows($result) > 0) {
         mysqli_close($conexion);
+        session_start();
         $_SESSION["logged_in"] = true;
         header("Location: indexAdmin.php");
         exit();
     } else {
-        echo "Nombre de usuario o contraseña incorrectos.";
-        exit();
+        $loginError = "error";
     }
 }
+
+if (isset($_POST["registro"])) {
+    $nombre = $_POST["nombre"];
+    $clave = $_POST["clave"];
+    $confirmarClave = $_POST["confirmar_clave"];
+
+    $conexion = conectar();
+
+    if (!$conexion) {
+        die("Error en la conexión: " . mysqli_connect_error());
+    }
+
+    if ($clave !== $confirmarClave) {
+        $contraseñasCoincidencia = "error";
+    } elseif (strlen($nombre) < 5 || strlen($clave) < 5) {
+        $caracteres = "error";
+    } else {
+        $sqlVerificarUsuario = "SELECT * FROM login WHERE usuario = '$nombre'";
+        $resultVerificarUsuario = mysqli_query($conexion, $sqlVerificarUsuario);
+
+        if ($resultVerificarUsuario && mysqli_num_rows($resultVerificarUsuario) > 0) {
+            $nombreEnUso = "error";
+        } else {
+            $claveEncriptada = password_hash($clave, PASSWORD_DEFAULT);
+            $sqlRegistro = "INSERT INTO login (usuario, clave) VALUES ('$nombre', '$claveEncriptada')";
+            $resultRegistro = mysqli_query($conexion, $sqlRegistro);
+
+            if ($resultRegistro) {
+                $guardadoRegistro = "exito";
+            } else {
+                $errorRegistro = "error";
+            }
+        }
+    }
+
+    mysqli_close($conexion);
+}
+
 ?>
