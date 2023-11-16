@@ -245,7 +245,6 @@ if (isset($_POST["botonModificarUsuario"])) {
     $conexion = conectar();
 
     if ($conexion != null) {
-        // Verificación de caracteres
         if (strlen($usuario) < 5 || strlen($clave) < 5) {
             $caracteres = "error";
         } else {
@@ -383,7 +382,6 @@ if (isset($_POST["registro"])) {
         if ($resultVerificarUsuario && mysqli_num_rows($resultVerificarUsuario) > 0) {
             $nombreEnUso = "error";
         } else {
-            // Nota: Aquí se guarda la contraseña en texto plano
             $sqlRegistro = "INSERT INTO login (usuario, clave) VALUES ('$nombre', '$clave')";
             $resultRegistro = mysqli_query($conexion, $sqlRegistro);
 

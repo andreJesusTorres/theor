@@ -174,7 +174,6 @@ require_once("consultas.php");
                 .then(response => response.ok ? response.text() : Promise.reject('Error al eliminar el usuario.'))
                 .then(data => {
                     alert(`Usuario eliminado con éxito. ID: ${id}`);
-                    // Aquí puedes redirigir o realizar otras acciones necesarias
                 })
                 .catch(error => {
                     console.error('Error:', error);
