@@ -42,7 +42,7 @@ function listar()
                 <tr>
                     <td>' . $datos["marca"] . '</td>
                     <td>' . $datos["nombre"] . '</td>
-                    <td>$' . $datos["precio"] . '</td>
+                    <td>€' . $datos["precio"] . '</td>
                     <td><img src="' . $datos["imagen"] . '" alt="Producto" style="max-width: 40px; max-height: 40px;"></td>
                 </tr>
                 ';
@@ -67,7 +67,7 @@ function listarSesion()
                         <td>' . $datos["marca"] . '</td>
                         <td>' . $datos["fechaAlta"] . '</td>
                         <td>' . $datos["nombre"] . '</td>
-                        <td>$' . $datos["precio"] . '</td>
+                        <td>€' . $datos["precio"] . '</td>
                         <td>' . $datos["cantidad"] . '</td>
                         <td>' . $datos["estado"] . '</td>
                         <td>';
@@ -185,7 +185,7 @@ function buscarProductos($busqueda)
                 echo '<td>' . $datos["marca"] . '</td>';
                 echo '<td>' . $datos["fechaAlta"] . '</td>';
                 echo '<td>' . $datos["nombre"] . '</td>';
-                echo '<td>' . $datos["precio"] . '</td>';
+                echo '€<td>' . $datos["precio"] . '</td>';
                 echo '<td>' . $datos["cantidad"] . '</td>';
                 echo '<td>' . $datos["estado"] . '</td>';
                 echo '<td>';
@@ -217,7 +217,7 @@ function buscarProductosAdmin($busqueda)
                     <td>' . $datos["marca"] . '</td>
                     <td>' . $datos["fechaAlta"] . '</td>
                     <td>' . $datos["nombre"] . '</td>
-                    <td>' . $datos["precio"] . ' x kg</td>
+                    <td>€' . $datos["precio"] . ' </td>
                     <td>' . $datos["cantidad"] . '</td>
                     <td>' . $datos["estado"] . '</td>
                     <td><img src="' . $datos["imagen"] . '" alt="Imagen del producto" style="max-width: 40px; max-height: 40px;"></td>
