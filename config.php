@@ -2,5 +2,5 @@
 define('server', 'localhost');
 define('usuario', 'root');
 define('clave', '');
-define('nombre', 'almacen');
+define('nombre', 'theor');
 ?>

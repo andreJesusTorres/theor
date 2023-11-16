@@ -129,7 +129,7 @@ function listarUsuarios()
         } else {
             echo '<tr><td colspan="4">No se encontraron usuarios.</td></tr>';
         }
-        mysqli_close($conexion);
+
     }
 }
 

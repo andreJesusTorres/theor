@@ -8,7 +8,11 @@ require_once("consultas.php");
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Almacén</title>
+    <title>Theor Admin
+        <?php if (isset($_GET['gestionarUsuarios']))
+            echo ' - Gestionar Usuarios'; ?>
+    </title>
+    <link rel="icon" href="img/icono.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
