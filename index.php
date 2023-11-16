@@ -1,5 +1,8 @@
 <?php
 require_once("consultas.php");
+if (isset($_SESSION["login"])) {
+    header("location:index.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -120,7 +123,34 @@ require_once("consultas.php");
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <?php endif; ?>
-
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="img/local.gif" alt="..." /></div>
+                <div class="col-md-6">
+                    <div class="small mb-1">Ubicación</div>
+                    <h1 class="display-5 fw-bolder">Nuestro local</h1>
+                    <p class="lead">Nos encontramos en Carrer dels Gegants de Sitges, 08870 Sitges, Barcelona, España.
+                        Nuestros horarios son de 8:00 a 18:00. </p>
+                    <div class="d-flex">
+                        <a class="btn btn-outline-dark flex-shrink-0"
+                            href="https://www.google.com/maps/place/Carrer+dels+Gegants+de+Sitges,+08870+Sitges,+Barcelona,+Espa%C3%B1a/@41.2374345,1.8191157,18z/data=!4m15!1m8!3m7!1s0x12a3804720b208fb:0x7061f1fb2907c8f9!2s08870+Sitges,+Barcelona,+Espa%C3%B1a!3b1!8m2!3d41.2371851!4d1.805886!16zL20vMDEwbmY0!3m5!1s0x12a3803a6652d039:0xe432fcf45da9225d!8m2!3d41.2375011!4d1.8191479!16s%2Fg%2F11s4yvj6sb?entry=ttu"
+                            target="_blank">
+                            <i class="bi-cart-fill me-1"></i>
+                            Mapa
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-5 bg-light">
+        <div class="container px-4 px-lg-5 mt-5">
+            <h2 class="fw-bolder mb-4">Related products</h2>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            </div>
+        </div>
+    </section>
     <?php
     $conexion = conectar();
     if ($conexion != null) {
@@ -133,8 +163,11 @@ require_once("consultas.php");
         }
     }
     ?>
-
-
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; André Jesús Torres</p>
+        </div>
+    </footer>
     <script src="js/bootstrap.bundle.js"></script>
 </body>
 

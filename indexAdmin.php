@@ -1,5 +1,8 @@
 <?php
 require_once("consultas.php");
+if (isset($_SESSION["login"])) {
+    header("location:index.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +13,7 @@ require_once("consultas.php");
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Theor Admin
         <?php if (isset($_GET['gestionarUsuarios']))
-            echo ' - Gestionar Usuarios'; ?>
+            echo ': Gestionar Usuarios'; ?>
     </title>
     <link rel="icon" href="img/icono.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
@@ -167,6 +170,11 @@ require_once("consultas.php");
     </div>';
     }
     ?>
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; André Jesús Torres</p>
+        </div>
+    </footer>
 
     <script>
         function editarUsuario(id) {

@@ -119,6 +119,11 @@ if (!isset($_GET["id"])) {
             </div>
         </div>
     </form>
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; André Jesús Torres</p>
+        </div>
+    </footer>
     <script src="js/bootstrap.bundle.js"></script>
 </body>
 

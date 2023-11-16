@@ -1,58 +1,42 @@
 <?php
 require_once("conexion.php");
-
 function listar()
 {
     $conexion = conectar();
     if ($conexion != null) {
         echo '
-        <style>
-            .container-fluid {
-                padding-left: 0;
-                padding-right: 0;
-            }
-            .table-responsive {
-                margin: 0 auto;
-            }
-            .table td,
-            .table th {
-                text-align: center;
-            }
-            .table img {
-                max-width: 50px;
-                max-height: 50px;
-            }
-        </style>
-        <table class="table table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Marca</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Imagen</th>
-                    </tr>
-                </thead>
-                <tbody>';
+        <section class="py-5 bg-light">
+            <div class="container px-4 px-lg-5 mt-5">
+                <h2 class="fw-bolder mb-4">Related products</h2>
+                <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center">';
 
         $sql = "SELECT * FROM productos WHERE estado=1 ORDER BY marca ASC, nombre ASC";
         $consulta = mysqli_query($conexion, $sql);
         if (mysqli_num_rows($consulta) > 0) {
             while ($datos = mysqli_fetch_assoc($consulta)) {
                 echo '
-                <tr>
-                    <td>' . $datos["marca"] . '</td>
-                    <td>' . $datos["nombre"] . '</td>
-                    <td>€' . $datos["precio"] . '</td>
-                    <td><img src="' . $datos["imagen"] . '" alt="Producto" style="max-width: 40px; max-height: 40px;"></td>
-                </tr>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="' . $datos["imagen"] . '" alt="Product image">
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">' . $datos["nombre"] . '</h5>
+                                    €' . $datos["precio"] . '
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 ';
             }
         }
-        echo '</tbody></table>';
+
+        echo '
+                </div>
+            </div>
+        </section>';
         mysqli_close($conexion);
     }
 }
-
 function listarSesion()
 {
     $conexion = conectar();
@@ -97,8 +81,6 @@ function listarSesion()
         mysqli_close($conexion);
     }
 }
-
-
 function listarUsuarios()
 {
     $conexion = conectar();
@@ -132,23 +114,6 @@ function listarUsuarios()
 
     }
 }
-
-if (isset($_POST["botonEliminarUsuario"])) {
-    $idUsuario = $_POST["idUsuario"];
-    $conexion = conectar();
-
-    if ($conexion != null) {
-        $sql = "DELETE FROM login WHERE id = '$idUsuario'";
-        $eliminar = mysqli_query($conexion, $sql);
-
-        if (!$eliminar) {
-            echo "Error al eliminar el usuario.";
-        }
-
-        mysqli_close($conexion);
-    }
-}
-
 function logout()
 {
     session_start();
@@ -156,7 +121,6 @@ function logout()
     header("location:index.php");
     exit();
 }
-
 function buscarProductos($busqueda)
 {
     $conexion = conectar();
@@ -202,9 +166,9 @@ function buscarProductos($busqueda)
         mysqli_close($conexion);
     }
 }
-
 function buscarProductosAdmin($busqueda)
 {
+
     $conexion = conectar();
     if ($conexion != null) {
         $sql = "SELECT * FROM productos WHERE marca LIKE '%$busqueda%' OR nombre LIKE '%$busqueda%' OR precio LIKE '%$busqueda%' OR estado LIKE '%$busqueda%'";
@@ -236,9 +200,9 @@ function buscarProductosAdmin($busqueda)
         mysqli_close($conexion);
     }
 }
-
 function buscarUsuarios($busqueda)
 {
+
     $conexion = conectar();
     if ($conexion != null) {
         $sql = "SELECT * FROM usuarios WHERE usuario LIKE '%$busqueda%' OR id LIKE '%$busqueda%' OR clave LIKE '%$busqueda%'";
@@ -273,6 +237,7 @@ function buscarUsuarios($busqueda)
 }
 
 if (isset($_POST["botonModificarUsuario"])) {
+
     $idUsuario = $_POST["inputID"];
     $usuario = $_POST["inputUsuario"];
     $clave = $_POST["inputClave"];
@@ -298,13 +263,28 @@ if (isset($_POST["botonModificarUsuario"])) {
 
             mysqli_stmt_close($stmt);
         }
+        mysqli_close($conexion);
+    }
+}
+
+if (isset($_POST["botonEliminarUsuario"])) {
+    $idUsuario = $_POST["idUsuario"];
+    $conexion = conectar();
+
+    if ($conexion != null) {
+        $sql = "DELETE FROM login WHERE id = '$idUsuario'";
+        $eliminar = mysqli_query($conexion, $sql);
+
+        if (!$eliminar) {
+            echo "Error al eliminar el usuario.";
+        }
 
         mysqli_close($conexion);
     }
 }
 
-
 if (isset($_POST["botonModificar"])) {
+
     $codigo = $_POST["inputCodigo"];
     $marca = $_POST["inputMarca"];
     $fechaAlta = $_POST["inputFecha"];
@@ -335,6 +315,7 @@ if (isset($_POST["botonModificar"])) {
 }
 
 if (isset($_POST["botonGuardar"])) {
+
     $conexion = conectar();
     $marca = $_POST["inputMarca"];
     $nombre = $_POST["inputNombre"];
@@ -373,6 +354,7 @@ if (isset($_POST["botonEliminar"])) {
 }
 
 if (isset($_POST["login"])) {
+
     $nombre = $_POST["usuario"];
     $clave = $_POST["clave"];
     $conexion = conectar();
@@ -396,6 +378,7 @@ if (isset($_POST["login"])) {
 }
 
 if (isset($_POST["registro"])) {
+
     $nombre = $_POST["nombre"];
     $clave = $_POST["clave"];
     $confirmarClave = $_POST["confirmar_clave"];
@@ -430,6 +413,5 @@ if (isset($_POST["registro"])) {
 
     mysqli_close($conexion);
 }
-
 
 ?>
