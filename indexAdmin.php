@@ -29,7 +29,8 @@ require_once("consultas.php");
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="indexAdmin.php">Home
+                        <a class="nav-link <?php echo ((!isset($_GET["gestionarUsuarios"])) && (!isset($_GET["botonBuscar"]))) ? 'active' : ''; ?>"
+                            href="indexAdmin.php">Home
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
@@ -37,14 +38,18 @@ require_once("consultas.php");
                         <a class="nav-link" href="nuevo.php">Agregar producto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="indexAdmin.php?gestionarUsuarios">Gestionar Usuarios</a>
+                        <a class="nav-link <?php echo (isset($_GET["gestionarUsuarios"])) ? 'active' : ''; ?>"
+                            href="indexAdmin.php?gestionarUsuarios">Gestionar Usuarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php" onclick="cerrarSesion()">Cerrar Sesión
+                        <a class="nav-link" href="index.php" onclick="cerrarSesion()">Cerrar Sesión
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
                 </ul>
+                <a href="https://www.instagram.com/___andretorres/">
+                    <img src="img/instagram.png" alt="Theor">
+                </a>
                 <form class="d-flex">
                     <input class="form-control me-sm-2" type="search" name="inputBuscar" placeholder="Buscar">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit" name="botonBuscar">Buscar</button>
@@ -147,9 +152,15 @@ require_once("consultas.php");
                     </thead>
                     <tbody>';
 
-        listarUsuarios();
+        if (isset($_GET["botonBuscar"])) {
+            $busqueda = $_GET["inputBuscar"];
+            buscarUsuarios($busqueda);
+        } else {
+            listarUsuarios();
+        }
 
         echo '
+        
                 </tbody>
             </table>
         </div>

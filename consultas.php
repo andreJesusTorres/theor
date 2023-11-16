@@ -237,6 +237,41 @@ function buscarProductosAdmin($busqueda)
     }
 }
 
+function buscarUsuarios($busqueda)
+{
+    $conexion = conectar();
+    if ($conexion != null) {
+        $sql = "SELECT * FROM usuarios WHERE usuario LIKE '%$busqueda%' OR id LIKE '%$busqueda%' OR clave LIKE '%$busqueda%'";
+        $consulta = mysqli_query($conexion, $sql);
+        if (mysqli_num_rows($consulta) > 0) {
+            while ($datos = mysqli_fetch_assoc($consulta)) {
+                echo '
+                <tr>
+                    <td>' . $datos["id"] . '</td>
+                    <td>' . $datos["usuario"] . '</td>
+                    <td>' . $datos["clave"] . '</td>
+                    <td>
+                        <form method="GET" action="editarUsuario.php">
+                            <button class="btn btn-sm btn-outline-dark" name="idUsuario" value="' . $datos["id"] . '">
+                                Editar
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="POST" action="eliminarUsuario.php">
+                            <input type="hidden" name="idUsuario" value="' . $datos["id"] . '">
+                            <button class="btn btn-sm btn-outline-danger" name="botonEliminar">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>';
+            }
+        } else {
+            echo '<tr><td colspan="4">No se encontraron resultados.</td></tr>';
+        }
+        mysqli_close($conexion);
+    }
+}
+
 if (isset($_POST["botonModificarUsuario"])) {
     $idUsuario = $_POST["inputID"];
     $usuario = $_POST["inputUsuario"];
