@@ -29,14 +29,14 @@ if (!isset($_GET["id"])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Editar Usuario</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
 
 <body>
-    <img src="img/almacen.png" style="width: 100%;" alt="Almacén 'El Pepe'">
+    <img src="img/banner.gif" style="width: 100%;" alt="Theor">
     <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
         <div class="container-fluid">
-            <img src="img/pepe-argento.png" alt="Logo del Almacén 'El Pepe'">
+            <img src="img/logo.png" alt="Theor">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -108,10 +108,10 @@ if (!isset($_GET["id"])) {
         </div>
         <div class="d-flex justify-content-center mt-2">
             <div style="margin-right: 10%;">
-                <a class="btn btn-lg btn-outline-primary" href="indexAdmin.php">Volver</a>
+                <a class="btn btn-lg btn-outline-primary" href="indexAdmin.php?gestionarUsuarios"">Volver</a>
             </div>
             <div>
-                <button class="btn btn-lg btn-outline-primary" name="botonModificarUsuario">Modificar</button>
+                <button class=" btn btn-lg btn-outline-primary" name="botonModificarUsuario">Modificar</button>
             </div>
         </div>
     </form>

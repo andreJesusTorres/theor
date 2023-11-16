@@ -5,23 +5,50 @@ function listar()
 {
     $conexion = conectar();
     if ($conexion != null) {
-        $sql = "SELECT * FROM productos WHERE estado=1 ORDER BY categoria ASC, nombre ASC";
+        echo '
+        <style>
+            .container-fluid {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .table-responsive {
+                margin: 0 auto;
+            }
+            .table td,
+            .table th {
+                text-align: center;
+            }
+            .table img {
+                max-width: 50px;
+                max-height: 50px;
+            }
+        </style>
+        <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Imagen</th>
+                    </tr>
+                </thead>
+                <tbody>';
+
+        $sql = "SELECT * FROM productos WHERE estado=1 ORDER BY marca ASC, nombre ASC";
         $consulta = mysqli_query($conexion, $sql);
         if (mysqli_num_rows($consulta) > 0) {
             while ($datos = mysqli_fetch_assoc($consulta)) {
                 echo '
                 <tr>
-                    <th scope="row">' . $datos["codigo"] . '</th>
-                    <td>' . $datos["categoria"] . '</td>
-                    <td>' . $datos["fechaAlta"] . '</td>
+                    <td>' . $datos["marca"] . '</td>
                     <td>' . $datos["nombre"] . '</td>
-                    <td>' . $datos["precio"] . ' x kg</td>
-                    <td>' . $datos["cantidad"] . '</td>
-                    <td><img src="' . $datos["imagen"] . '" alt="Producto"></td>
+                    <td>$' . $datos["precio"] . '</td>
+                    <td><img src="' . $datos["imagen"] . '" alt="Producto" style="max-width: 40px; max-height: 40px;"></td>
                 </tr>
                 ';
             }
         }
+        echo '</tbody></table>';
         mysqli_close($conexion);
     }
 }
@@ -30,23 +57,23 @@ function listarSesion()
 {
     $conexion = conectar();
     if ($conexion != null) {
-        $sql = "SELECT * FROM productos ORDER BY categoria ASC, nombre ASC";
+        $sql = "SELECT * FROM productos ORDER BY marca ASC, nombre ASC";
         $consulta = mysqli_query($conexion, $sql);
         if (mysqli_num_rows($consulta) > 0) {
             while ($datos = mysqli_fetch_assoc($consulta)) {
                 echo '
                     <tr>
                         <th scope="row">' . $datos["codigo"] . '</th>
-                        <td>' . $datos["categoria"] . '</td>
+                        <td>' . $datos["marca"] . '</td>
                         <td>' . $datos["fechaAlta"] . '</td>
                         <td>' . $datos["nombre"] . '</td>
-                        <td>' . $datos["precio"] . ' x kg</td>
+                        <td>$' . $datos["precio"] . '</td>
                         <td>' . $datos["cantidad"] . '</td>
                         <td>' . $datos["estado"] . '</td>
                         <td>';
 
                 if (!empty($datos["imagen"])) {
-                    echo '<img src="' . $datos["imagen"] . '" alt="Imagen del producto" style="max-width: 50px; max-height: 50px;">';
+                    echo '<img src="' . $datos["imagen"] . '" alt="Imagen del producto" style="max-width: 40px; max-height: 40px;">';
                 }
 
                 echo '</td>
@@ -134,51 +161,66 @@ function buscarProductos($busqueda)
 {
     $conexion = conectar();
     if ($conexion != null) {
-        $sql = "SELECT * FROM productos WHERE categoria LIKE '%$busqueda%' OR nombre LIKE '%$busqueda%' OR precio LIKE '%$busqueda%' OR estado LIKE '%$busqueda%'";
+        echo '<table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Código</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Fecha Alta</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Imagen</th>
+                    </tr>
+                </thead>
+                <tbody>';
+
+        $sql = "SELECT * FROM productos WHERE marca LIKE '%$busqueda%' OR nombre LIKE '%$busqueda%' OR precio LIKE '%$busqueda%' OR estado LIKE '%$busqueda%'";
         $consulta = mysqli_query($conexion, $sql);
         if (mysqli_num_rows($consulta) > 0) {
             while ($datos = mysqli_fetch_assoc($consulta)) {
                 echo '<tr>';
-                echo '<th scope="row">' . $datos["codigo"] . '</th>';
-                echo '<td>' . $datos["categoria"] . '</td>';
+                echo '<td>' . $datos["codigo"] . '</td>';
+                echo '<td>' . $datos["marca"] . '</td>';
                 echo '<td>' . $datos["fechaAlta"] . '</td>';
                 echo '<td>' . $datos["nombre"] . '</td>';
-                echo '<td>' . $datos["precio"] . ' x kg</td>';
+                echo '<td>' . $datos["precio"] . '</td>';
                 echo '<td>' . $datos["cantidad"] . '</td>';
                 echo '<td>' . $datos["estado"] . '</td>';
                 echo '<td>';
                 if (!empty($datos["imagen"])) {
-                    echo '<img src="' . $datos["imagen"] . '" alt="Imagen del producto" style="max-width: 50px; max-height: 50px;">';
+                    echo '<img src="' . $datos["imagen"] . '" alt="Imagen del producto" style="max-width: 40px; max-height: 40px;">';
                 }
                 echo '</td>';
                 echo '</tr>';
             }
         } else {
-            echo '<tr><td colspan="7">No se encontraron resultados.</td></tr>';
+            echo '<tr><td colspan="8">No se encontraron resultados.</td></tr>';
         }
+        echo '</tbody></table>';
         mysqli_close($conexion);
     }
 }
-
 
 function buscarProductosAdmin($busqueda)
 {
     $conexion = conectar();
     if ($conexion != null) {
-        $sql = "SELECT * FROM productos WHERE categoria LIKE '%$busqueda%' OR nombre LIKE '%$busqueda%' OR precio LIKE '%$busqueda%' OR estado LIKE '%$busqueda%'";
+        $sql = "SELECT * FROM productos WHERE marca LIKE '%$busqueda%' OR nombre LIKE '%$busqueda%' OR precio LIKE '%$busqueda%' OR estado LIKE '%$busqueda%'";
         $consulta = mysqli_query($conexion, $sql);
         if (mysqli_num_rows($consulta) > 0) {
             while ($datos = mysqli_fetch_assoc($consulta)) {
                 echo '
                 <tr>
                     <th scope="row">' . $datos["codigo"] . '</th>
-                    <td>' . $datos["categoria"] . '</td>
+                    <td>' . $datos["marca"] . '</td>
                     <td>' . $datos["fechaAlta"] . '</td>
                     <td>' . $datos["nombre"] . '</td>
                     <td>' . $datos["precio"] . ' x kg</td>
                     <td>' . $datos["cantidad"] . '</td>
                     <td>' . $datos["estado"] . '</td>
-                    <td><img src="' . $datos["imagen"] . '" alt="Imagen del producto" style="max-width: 50px;"></td>
+                    <td><img src="' . $datos["imagen"] . '" alt="Imagen del producto" style="max-width: 40px; max-height: 40px;"></td>
                     <td>
                         <form method="GET" action="editar.php">
                             <button class="btn btn-sm btn-outline-dark" name="codigo" value="' . $datos["codigo"] . '">
@@ -230,7 +272,7 @@ if (isset($_POST["botonModificarUsuario"])) {
 
 if (isset($_POST["botonModificar"])) {
     $codigo = $_POST["inputCodigo"];
-    $categoria = $_POST["inputCategoria"];
+    $marca = $_POST["inputMarca"];
     $fechaAlta = $_POST["inputFecha"];
     $nombre = $_POST["inputNombre"];
     $precio = $_POST["inputPrecio"];
@@ -240,11 +282,11 @@ if (isset($_POST["botonModificar"])) {
     $imagen_temporal = $_FILES["inputImagen"]["tmp_name"];
 
     if (!empty($imagen)) {
-        $ruta_destino = "img/" . $imagen;
+        $ruta_destino = "img/productos/" . $imagen;
         move_uploaded_file($imagen_temporal, $ruta_destino);
-        $sql = "UPDATE productos SET categoria='$categoria', fechaAlta='$fechaAlta', nombre='$nombre', precio='$precio', estado='$estado', cantidad='$cantidad', imagen='$ruta_destino' WHERE codigo='$codigo'";
+        $sql = "UPDATE productos SET marca='$marca', fechaAlta='$fechaAlta', nombre='$nombre', precio='$precio', estado='$estado', cantidad='$cantidad', imagen='$ruta_destino' WHERE codigo='$codigo'";
     } else {
-        $sql = "UPDATE productos SET categoria='$categoria', fechaAlta='$fechaAlta', nombre='$nombre', precio='$precio', estado='$estado', cantidad='$cantidad' WHERE codigo='$codigo'";
+        $sql = "UPDATE productos SET marca='$marca', fechaAlta='$fechaAlta', nombre='$nombre', precio='$precio', estado='$estado', cantidad='$cantidad' WHERE codigo='$codigo'";
     }
 
     $conexion = conectar();
@@ -260,7 +302,7 @@ if (isset($_POST["botonModificar"])) {
 
 if (isset($_POST["botonGuardar"])) {
     $conexion = conectar();
-    $categoria = $_POST["inputCategoria"];
+    $marca = $_POST["inputMarca"];
     $nombre = $_POST["inputNombre"];
     $precio = $_POST["inputPrecio"];
     $estado = $_POST["inputEstado"];
@@ -268,10 +310,10 @@ if (isset($_POST["botonGuardar"])) {
     $imagen = $_FILES["inputImagen"]["name"];
     $imagen_temporal = $_FILES["inputImagen"]["tmp_name"];
 
-    $ruta_destino = "img/" . $imagen;
+    $ruta_destino = "img/productos/" . $imagen;
     move_uploaded_file($imagen_temporal, $ruta_destino);
 
-    $sql = "INSERT INTO productos (categoria, nombre, precio, estado, cantidad, imagen) VALUES ('$categoria', '$nombre', '$precio', '$estado', '$cantidad', '$ruta_destino')";
+    $sql = "INSERT INTO productos (marca, nombre, precio, estado, cantidad, imagen) VALUES ('$marca', '$nombre', '$precio', '$estado', '$cantidad', '$ruta_destino')";
     $guardar = mysqli_query($conexion, $sql);
 
     if (!$guardar) {

@@ -9,15 +9,15 @@ require_once("consultas.php");
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Almacén</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
-    <img src="img/almacen.png" style="width: 100%;" alt="Almacén 'El Pepe'">
+    <img src="img/banner.gif" style="width: 100%;" alt="Theor">
     <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
         <div class="container-fluid">
-            <img src="img/pepe-argento.png" alt="Logo del Almacén 'El Pepe'">
+            <img src="img/logo.png" alt="Theor">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -50,6 +50,7 @@ require_once("consultas.php");
     </nav>
 
     <?php
+
     $conexion = conectar();
 
     if ($conexion != null) {
@@ -80,13 +81,14 @@ require_once("consultas.php");
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Código</th>
-                            <th scope="col">Categoría</th>
+                            <th scope="col">Marca</th>
                             <th scope="col">Fecha</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Cantidad</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Imagen</th>
+                            <th></th>
                             <th></th>
                         </tr>
                     </thead>
