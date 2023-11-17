@@ -151,6 +151,7 @@ if (isset($_SESSION["login"])) {
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Usuario</th>
+                            <th scope="col">Correo electrónico</th>
                             <th scope="col">Clave</th>
                             <th></th>
                             <th></th>

@@ -108,6 +108,11 @@ if (!isset($_GET["id"])) {
                     required>
             </div>
             <div class="mb-3">
+                <label class="form-label">Correo Electrónico</label>
+                <input type="email" name="inputCorreo" class="form-control" value="<?php echo $datos['correo']; ?>"
+                    required>
+            </div>
+            <div class="mb-3">
                 <label class="form-label">Clave</label>
                 <input type="password" name="inputClave" class="form-control" value="<?php echo $datos['clave']; ?>"
                     required>

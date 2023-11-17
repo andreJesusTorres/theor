@@ -37,41 +37,46 @@ if (isset($_SESSION["login"])) {
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                             aria-haspopup="true" aria-expanded="false">Iniciar Sesión</a>
-                        <div class="dropdown-menu" method="POST">
-                            <form method="POST" class="text-center w-100">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingInput" name="usuario" required>
-                                    <label for="floatingInput">Usuario</label>
+                        <div class="dropdown-menu dropdown-menu-end p-4" style="width: 300px;">
+                            <form method="POST" class="text-center">
+                                <h5 class="mb-4">Iniciar Sesión</h5>
+                                <div class="form-group mb-3">
+                                    <input type="text" class="form-control" id="floatingInput" name="usuario"
+                                        placeholder="Usuario" required>
                                 </div>
-                                <div class="form-floating">
+                                <div class="form-group mb-3">
                                     <input type="password" class="form-control" id="floatingPassword" name="clave"
-                                        required>
-                                    <label for="floatingPassword">Clave</label>
+                                        placeholder="Contraseña" required>
                                 </div>
-                                <input type="submit" class="btn btn-primary" name="login" value="Iniciar sesión">
+                                <button type="submit" class="btn btn-primary btn-block" name="login">Iniciar
+                                    sesión</button>
                             </form>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                             aria-haspopup="true" aria-expanded="false">Registrarse</a>
-                        <div class="dropdown-menu" method="POST">
-                            <form method="POST" class="text-center w-100">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingNombre" name="nombre" required>
-                                    <label for="floatingNombre">Nombre de usuario</label>
+                        <div class="dropdown-menu dropdown-menu-end p-4" style="width: 300px;">
+                            <form method="POST" class="text-center">
+                                <h5 class="mb-4">Registrarse</h5>
+                                <div class="form-group mb-3">
+                                    <input type="text" class="form-control" id="floatingNombre" name="nombre"
+                                        placeholder="Nombre de usuario" required>
                                 </div>
-                                <div class="form-floating mb-3">
+                                <div class="form-group mb-3">
+                                    <input type="email" class="form-control" id="floatingEmail" name="email"
+                                        placeholder="Correo electrónico" required>
+                                </div>
+                                <div class="form-group mb-3">
                                     <input type="password" class="form-control" id="floatingPasswordRegistro"
-                                        name="clave" required>
-                                    <label for="floatingPasswordRegistro">Contraseña</label>
+                                        name="clave" placeholder="Contraseña" required>
                                 </div>
-                                <div class="form-floating">
+                                <div class="form-group mb-3">
                                     <input type="password" class="form-control" id="floatingPasswordConfirmar"
-                                        name="confirmar_clave" required>
-                                    <label for="floatingPasswordConfirmar">Confirmar contraseña</label>
+                                        name="confirmar_clave" placeholder="Confirmar contraseña" required>
                                 </div>
-                                <input type="submit" class="btn btn-primary" name="registro" value="Registrarse">
+                                <button type="submit" class="btn btn-primary btn-block"
+                                    name="registro">Registrarse</button>
                             </form>
                         </div>
                     </li>

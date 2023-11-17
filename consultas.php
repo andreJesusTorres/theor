@@ -93,6 +93,7 @@ function listarUsuarios()
                     <tr>
                         <th scope="row">' . $datos["id"] . '</th>
                         <td>' . $datos["usuario"] . '</td>
+                        <td>' . $datos["correo"] . '</td>
                         <td>' . $datos["clave"] . '</td>
                         <td>
                             <button class="btn btn-sm btn-outline-dark" onclick="editarUsuario(' . $datos["id"] . ')">
@@ -213,6 +214,7 @@ function buscarUsuarios($busqueda)
                 <tr>
                     <td>' . $datos["id"] . '</td>
                     <td>' . $datos["usuario"] . '</td>
+                    <td>' . $datos["correo"] . '</td>
                     <td>' . $datos["clave"] . '</td>
                     <td>
                         <form method="GET" action="editarUsuario.php">
@@ -240,6 +242,7 @@ if (isset($_POST["botonModificarUsuario"])) {
 
     $idUsuario = $_POST["inputID"];
     $usuario = $_POST["inputUsuario"];
+    $correo = $_POST["inputCorreo"];
     $clave = $_POST["inputClave"];
 
     $conexion = conectar();
@@ -248,10 +251,10 @@ if (isset($_POST["botonModificarUsuario"])) {
         if (strlen($usuario) < 5 || strlen($clave) < 5) {
             $caracteres = "error";
         } else {
-            $sql = "UPDATE login SET usuario=?, clave=? WHERE id=?";
+            $sql = "UPDATE login SET usuario=?, correo=?, clave=? WHERE id=?";
             $stmt = mysqli_prepare($conexion, $sql);
 
-            mysqli_stmt_bind_param($stmt, "ssi", $usuario, $clave, $idUsuario);
+            mysqli_stmt_bind_param($stmt, "sssi", $usuario, $correo, $clave, $idUsuario);
 
             $modificar = mysqli_stmt_execute($stmt);
 
@@ -413,5 +416,4 @@ if (isset($_POST["registro"])) {
 
     mysqli_close($conexion);
 }
-
 ?>
