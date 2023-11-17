@@ -133,7 +133,8 @@ if (isset($_SESSION["login"])) {
                 <div class="col-md-6">
                     <div class="small mb-1">Ubicación</div>
                     <h1 class="display-5 fw-bolder">Nuestro local</h1>
-                    <p class="lead">Nos encontramos en Carrer dels Gegants de Sitges, 08870 Sitges, Barcelona, España.
+                    <p class="lead">Sitges, la ciudad costera más encantadora de Cataluña, alberga nuestra empresa,
+                        ubicada en la calle dels Gegants, 08870 Sitges, Barcelona, España.
                         Nuestros horarios son de 8:00 a 18:00. </p>
                     <div class="d-flex">
                         <a class="btn btn-outline-dark flex-shrink-0"
@@ -147,10 +148,19 @@ if (isset($_SESSION["login"])) {
             </div>
         </div>
     </section>
-    <section class="py-5 bg-light">
-        <div class="container px-4 px-lg-5 mt-5">
-            <h2 class="fw-bolder mb-4">Related products</h2>
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <div class="col-md-6">
+                    <div class="small mb-1">Sorteo válido hasta el 31 de diciembre de 2023.</div>
+                    <h1 class="display-5 fw-bolder">Sorteo</h1>
+                    <p class="lead">Con la compra de cualquier producto de nuestra tienda valorado en más de €100,
+                        participas automáticamente en el sorteo de esta espectacular vivienda. No lo dudes, ¡esta es tu
+                        oportunidad de tener la casa de tus sueños!</p>
+                </div>
+                <div class="col-md-6">
+                    <img class="card-img-top mb-5 mb-md-0" src="img/sorteo.gif" alt="..." />
+                </div>
             </div>
         </div>
     </section>

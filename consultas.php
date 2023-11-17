@@ -7,7 +7,7 @@ function listar()
         echo '
         <section class="py-5 bg-light">
             <div class="container px-4 px-lg-5 mt-5">
-                <h2 class="fw-bolder mb-4">Related products</h2>
+                <h2 class="fw-bolder mb-4">Nuestos productos</h2>
                 <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center">';
 
         $sql = "SELECT * FROM productos WHERE estado=1 ORDER BY marca ASC, nombre ASC";
