@@ -136,6 +136,5 @@ if (!isset($_GET["codigo"])) {
     </footer>
 </form>
 <script src="js/bootstrap.bundle.js"></script>
-</body>
 
 </html>
