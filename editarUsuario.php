@@ -64,6 +64,9 @@ if (!isset($_GET["id"])) {
                 <a href="https://www.instagram.com/___andretorres/">
                     <img src="img/instagram.png" alt="Theor">
                 </a>
+                <a href="https://github.com/andreJesusTorres">
+                    <img src="img/github.png" alt="Theor">
+                </a>
                 <form class="d-flex">
                     <input class="form-control me-sm-2" type="search" name="inputBuscar" placeholder="Buscar">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit" name="botonBuscar">Buscar</button>
