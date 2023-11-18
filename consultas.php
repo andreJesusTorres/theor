@@ -86,8 +86,6 @@ function listarSesion()
         mysqli_close($conexion);
     }
 }
-
-
 function listarUsuarios()
 {
     $conexion = conectar();
@@ -304,6 +302,11 @@ if (isset($_POST["botonModificar"])) {
     $cantidad = $_POST["inputCantidad"];
     $imagen = $_FILES["inputImagen"]["name"];
     $imagen_temporal = $_FILES["inputImagen"]["tmp_name"];
+    if ($cantidad == 0) {
+        $estado = 0;
+    } else {
+        $estado = 1;
+    }
 
     if (!empty($imagen)) {
         $ruta_destino = "img/productos/" . $imagen;
@@ -334,6 +337,11 @@ if (isset($_POST["botonGuardar"])) {
     $cantidad = $_POST["inputCantidad"];
     $imagen = $_FILES["inputImagen"]["name"];
     $imagen_temporal = $_FILES["inputImagen"]["tmp_name"];
+    if ($cantidad == 0) {
+        $estado = 0;
+    } else {
+        $estado = 1;
+    }
 
     $ruta_destino = "img/productos/" . $imagen;
     move_uploaded_file($imagen_temporal, $ruta_destino);
