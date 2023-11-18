@@ -117,6 +117,10 @@ if (!isset($_GET["id"])) {
                 <input type="password" name="inputClave" class="form-control" value="<?php echo $datos['clave']; ?>"
                     required>
             </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="adminCheckbox" name="inputAdmin" value="1" <?php echo $datos['admin'] == 1 ? 'checked' : ''; ?>>
+                <label class="form-check-label" for="adminCheckbox">Administrador</label>
+            </div>
         </div>
         <div class="d-flex justify-content-center mt-2">
             <div style="margin-right: 10%;">

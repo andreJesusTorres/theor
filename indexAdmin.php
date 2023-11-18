@@ -3,6 +3,7 @@ require_once("consultas.php");
 if (isset($_SESSION["login"])) {
     header("location:index.php");
 }
+$nombreUsuario = $_SESSION["login"]["usuario"];
 ?>
 
 <!DOCTYPE html>
@@ -153,6 +154,7 @@ if (isset($_SESSION["login"])) {
                             <th scope="col">Usuario</th>
                             <th scope="col">Correo electrónico</th>
                             <th scope="col">Clave</th>
+                            <th scope="col">Administrador</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -174,6 +176,7 @@ if (isset($_SESSION["login"])) {
     </div>';
     }
     ?>
+
     <footer class="py-5 bg-dark">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; André Jesús Torres</p>

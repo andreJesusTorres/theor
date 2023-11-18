@@ -100,6 +100,13 @@ function listarUsuarios()
                         <td>' . $datos["usuario"] . '</td>
                         <td>' . $datos["correo"] . '</td>
                         <td>' . $datos["clave"] . '</td>
+                        <td>';
+
+                if ($datos["admin"] == 1) {
+                    echo '<i class="fas fa-crown text-warning"></i>';
+                }
+
+                echo '</td>
                         <td>
                             <button class="btn btn-sm btn-outline-dark" onclick="editarUsuario(' . $datos["id"] . ')">
                                 <i class="fa-solid fa-pen-to-square"></i>
@@ -244,11 +251,11 @@ function buscarUsuarios($busqueda)
 }
 
 if (isset($_POST["botonModificarUsuario"])) {
-
     $idUsuario = $_POST["inputID"];
     $usuario = $_POST["inputUsuario"];
     $correo = $_POST["inputCorreo"];
     $clave = $_POST["inputClave"];
+    $admin = isset($_POST["inputAdmin"]) ? 1 : 0;
 
     $conexion = conectar();
 
@@ -256,10 +263,10 @@ if (isset($_POST["botonModificarUsuario"])) {
         if (strlen($usuario) < 5 || strlen($clave) < 5) {
             $caracteres = "error";
         } else {
-            $sql = "UPDATE login SET usuario=?, correo=?, clave=? WHERE id=?";
+            $sql = "UPDATE login SET usuario=?, correo=?, clave=?, admin=? WHERE id=?";
             $stmt = mysqli_prepare($conexion, $sql);
 
-            mysqli_stmt_bind_param($stmt, "sssi", $usuario, $correo, $clave, $idUsuario);
+            mysqli_stmt_bind_param($stmt, "sssii", $usuario, $correo, $clave, $admin, $idUsuario);
 
             $modificar = mysqli_stmt_execute($stmt);
 
@@ -372,7 +379,6 @@ if (isset($_POST["botonEliminar"])) {
 }
 
 if (isset($_POST["login"])) {
-
     $nombre = $_POST["usuario"];
     $clave = $_POST["clave"];
     $conexion = conectar();
@@ -381,14 +387,26 @@ if (isset($_POST["login"])) {
         die("Error en la conexión: " . mysqli_connect_error());
     }
 
+
     $sql = "SELECT * FROM login WHERE usuario = '$nombre' AND clave = '$clave'";
     $result = mysqli_query($conexion, $sql);
 
     if ($result && mysqli_num_rows($result) > 0) {
+        $usuario = mysqli_fetch_assoc($result);
+
         mysqli_close($conexion);
         session_start();
-        $_SESSION["logged_in"] = true;
-        header("Location: indexAdmin.php");
+
+        $_SESSION["login"] = [
+            "usuario" => $usuario['usuario'],
+        ];
+
+        if ($usuario['admin'] == 1) {
+            header("Location: indexAdmin.php");
+        } else {
+            header("Location: indexCliente.php");
+        }
+
         exit();
     } else {
         $loginError = "error";
