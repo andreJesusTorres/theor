@@ -7,7 +7,7 @@ function listar()
         echo '
         <section class="py-5 bg-light">
             <div class="container px-4 px-lg-5 mt-5">
-                <h2 class="fw-bolder mb-4">Nuestos productos</h2>
+                <h2 class="fw-bolder mb-4">Nuestros productos</h2>
                 <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center">';
 
         $sql = "SELECT * FROM productos WHERE estado=1 ORDER BY marca ASC, nombre ASC";
@@ -53,7 +53,12 @@ function listarSesion()
                         <td>' . $datos["nombre"] . '</td>
                         <td>€' . $datos["precio"] . '</td>
                         <td>' . $datos["cantidad"] . '</td>
-                        <td>' . $datos["estado"] . '</td>
+                        <td>';
+
+                // Mostrar un ícono para representar el estado del producto
+                echo ($datos["estado"] == 1) ? '<i class="fas fa-check-circle text-success"></i>' : '<i class="fas fa-times-circle text-danger"></i>';
+
+                echo '</td>
                         <td>';
 
                 if (!empty($datos["imagen"])) {
@@ -69,7 +74,7 @@ function listarSesion()
                             </form>
                         </td>
                         <td>
-                            <form method="POST"">
+                            <form method="POST">
                                 <input type="hidden" name="codigo" value="' . $datos["codigo"] . '">
                                 <button class="btn btn-sm btn-outline-danger" name="botonEliminar">Eliminar</button>
                             </form>
@@ -81,6 +86,8 @@ function listarSesion()
         mysqli_close($conexion);
     }
 }
+
+
 function listarUsuarios()
 {
     $conexion = conectar();

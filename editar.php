@@ -105,8 +105,12 @@ if (!isset($_GET["codigo"])) {
         </div>
         <div>
             <label class="form-label">Estado</label>
-            <input type="text" name="inputEstado" class="form-control" placeholder="Estado del producto"
-                value="<?php echo $datos["estado"]; ?>" required>
+            <select class="form-select" name="inputEstado" required>
+                <option value="1" <?php if ($datos["estado"] == '1')
+                    echo 'selected'; ?>>Activo</option>
+                <option value="0" <?php if ($datos["estado"] == '0')
+                    echo 'selected'; ?>>Desactivado</option>
+            </select>
         </div>
         <div class="mb-3">
             <label class="form-label">Imagen</label>
