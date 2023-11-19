@@ -3,7 +3,7 @@ require_once("consultas.php");
 if (isset($_SESSION["login"])) {
     header("location:index.php");
 }
-$nombreUsuario = $_SESSION["login"]["usuario"];
+
 ?>
 
 <!DOCTYPE html>
