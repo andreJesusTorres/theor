@@ -1,10 +1,11 @@
 <?php
 require_once("consultas.php");
-if (isset($_SESSION["login"])) {
-    header("location:index.php");
-}
-
 session_start();
+
+if (isset($_GET['codigo_producto'])) {
+    $codigo_producto = $_GET['codigo_producto'];
+    $detalles_producto = obtenerDetallesProducto($codigo_producto);
+}
 
 ?>
 
@@ -60,46 +61,43 @@ session_start();
         </div>
     </nav>
     <section class="py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="row gx-4 gx-lg-5 align-items-center">
-                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="img/local.gif" alt="..." /></div>
+        <div class="container">
+            <div class="row">
                 <div class="col-md-6">
-                    <div class="small mb-1">Ubicación</div>
-                    <h1 class="display-5 fw-bolder">Nuestro local</h1>
-                    <p class="lead">Sitges, la ciudad costera más encantadora de Cataluña, alberga nuestra empresa,
-                        ubicada en la calle dels Gegants, 08870 Sitges, Barcelona, España.
-                        Nuestros horarios son de 8:00 a 18:00. </p>
-                    <div class="d-flex">
-                        <a class="btn btn-outline-dark flex-shrink-0"
-                            href="https://www.google.com/maps/place/Carrer+dels+Gegants+de+Sitges,+08870+Sitges,+Barcelona,+Espa%C3%B1a/@41.2374345,1.8191157,18z/data=!4m15!1m8!3m7!1s0x12a3804720b208fb:0x7061f1fb2907c8f9!2s08870+Sitges,+Barcelona,+Espa%C3%B1a!3b1!8m2!3d41.2371851!4d1.805886!16zL20vMDEwbmY0!3m5!1s0x12a3803a6652d039:0xe432fcf45da9225d!8m2!3d41.2375011!4d1.8191479!16s%2Fg%2F11s4yvj6sb?entry=ttu"
-                            target="_blank">
-                            <i class="bi-cart-fill me-1"></i>
-                            Mapa
-                        </a>
-                    </div>
+                    <img class="img-fluid" src="<?php echo $detalles_producto['imagen']; ?>" alt="Producto">
+                </div>
+                <div class="col-md-6">
+                    <h1 class="fw-bold display-4">
+                        <?php echo $detalles_producto['nombre']; ?> -
+                        <?php echo $detalles_producto['marca']; ?>
+                    </h1>
+                    <p class="lead">Precio: €
+                        <?php echo $detalles_producto['precio_sin_impuestos']; ?>
+                    </p>
+                    <p class="lead">Tasas: €
+                        <?php echo $detalles_producto['tasa_impuestos']; ?>
+                    </p>
+                    <p class="lead text-success">Envío gratis</p>
+                    <hr>
+                    <h4 class="fw-bold">Precio Final: €
+                        <?php echo $detalles_producto['precio_final']; ?>
+                    </h4>
+                    <button class="btn btn-primary btn-lg mt-4">Comprar</button>
+                    <p class="mt-4">Vendido por: Theor</p>
+                    <p class="mt-4">
+                        Calificaciones y opiniones:
+                        <span>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </span>
+                    </p>
                 </div>
             </div>
         </div>
     </section>
-
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="row gx-4 gx-lg-5 align-items-center">
-                <div class="col-md-6">
-                    <div class="small mb-1">Sorteo válido hasta el 31 de diciembre de 2023.</div>
-                    <h1 class="display-5 fw-bolder">Sorteo</h1>
-                    <p class="lead">Con la compra de cualquier producto de nuestra tienda valorado en más de €100,
-                        participas automáticamente en el sorteo de esta espectacular vivienda. No lo dudes, ¡esta es tu
-                        oportunidad de tener la casa de tus sueños!</p>
-                </div>
-                <div class="col-md-6">
-                    <img class="card-img-top mb-5 mb-md-0" src="img/sorteo.gif" alt="..." />
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <?php listarCliente(); ?>
 
     <footer class="py-5 bg-dark">
         <div class="container">

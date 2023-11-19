@@ -37,6 +37,71 @@ function listar()
         mysqli_close($conexion);
     }
 }
+function listarCliente()
+{
+    $conexion = conectar();
+    if ($conexion != null) {
+        echo '
+        <section class="py-5 bg-light">
+            <div class="container px-4 px-lg-5 mt-5">
+                <h2 class="fw-bolder mb-4">Nuestros productos</h2>
+                <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center">';
+
+        $sql = "SELECT * FROM productos WHERE estado=1 ORDER BY marca ASC, nombre ASC";
+        $consulta = mysqli_query($conexion, $sql);
+        if (mysqli_num_rows($consulta) > 0) {
+            while ($datos = mysqli_fetch_assoc($consulta)) {
+                echo '
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="' . $datos["imagen"] . '" alt="Product image">
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">' . $datos["nombre"] . '</h5>
+                                    <p class="text-muted">€' . $datos["precio"] . '</p>
+                                    <a href="indexClienteCompra.php?codigo_producto=' . $datos["codigo"] . '" class="btn btn-dark btn-sm">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ';
+            }
+        }
+
+        echo '
+                </div>
+            </div>
+        </section>';
+        mysqli_close($conexion);
+    }
+}
+function obtenerDetallesProducto($codigo_producto)
+{
+    $conexion = conectar();
+    $detalles_producto = array();
+
+    if ($conexion != null) {
+        $sql = "SELECT imagen, nombre, precio, marca FROM productos WHERE codigo = $codigo_producto";
+        $consulta = mysqli_query($conexion, $sql);
+
+        if ($consulta) {
+            $producto = mysqli_fetch_assoc($consulta);
+
+            $precio_sin_impuestos = $producto['precio'];
+            $tasa_impuestos = $precio_sin_impuestos * 0.04;
+            $precio_final = $precio_sin_impuestos + $tasa_impuestos;
+
+            $producto['precio_sin_impuestos'] = $precio_sin_impuestos;
+            $producto['tasa_impuestos'] = $tasa_impuestos;
+            $producto['precio_final'] = $precio_final;
+
+            $detalles_producto = $producto;
+        }
+        mysqli_close($conexion);
+    }
+
+    return $detalles_producto;
+}
 function listarSesion()
 {
     $conexion = conectar();
