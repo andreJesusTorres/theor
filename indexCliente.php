@@ -32,27 +32,17 @@ session_start();
             </button>
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item dropdown">
-                        <div class="collapse navbar-collapse" id="navbarColor01">
-                            <ul class="navbar-nav me-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link active mr-3" href="indexCliente.php">Home
-                                        <span class="visually-hidden">(current)</span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="navbar-text me-3">
-                                <i class="fas fa-user-circle"></i> <!-- Ícono de la persona -->
-                                Bienvenido,
-                                <?php echo $_SESSION["login"]["usuario"]; ?>
-                            </div>
+                    <li class="nav-item">
+                        <a class="nav-link active mr-1" href="indexCliente.php">Home
+                            <span class="visually-hidden">(current)</span>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php" onclick="cerrarSesion()">Cerrar Sesión
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
             </div>
-
             </li>
             </ul>
             <a href="https://www.instagram.com/___andretorres/">
@@ -62,8 +52,13 @@ session_start();
                 <img src="img/github.png" alt="Theor">
             </a>
             <form class="d-flex" method="GET">
-                <input class="form-control me-sm-2" type="search" name="inputBuscar" placeholder="Buscar">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit" name="botonBuscar">Buscar</button>
+                <div class="navbar-text me-3">
+                    <i class="fas fa-user-circle fa-lg me-2"></i> <!-- Ícono de la persona -->
+                    <span class="d-none d-lg-inline-block"> <!-- Mostrar texto en pantallas grandes -->
+                        Bienvenido,
+                        <?php echo $_SESSION["login"]["usuario"]; ?>
+                    </span>
+                </div>
             </form>
         </div>
         </div>
@@ -143,18 +138,6 @@ session_start();
             </div>
         </div>
     </section>
-    <?php
-    $conexion = conectar();
-    if ($conexion != null) {
-
-        if (isset($_GET["botonBuscar"])) {
-            $busqueda = $_GET["inputBuscar"];
-            buscarProductos($busqueda);
-        } else {
-            listar();
-        }
-    }
-    ?>
     <footer class="py-5 bg-dark">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; André Jesús Torres</p>

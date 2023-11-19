@@ -55,7 +55,6 @@ function listarSesion()
                         <td>' . $datos["cantidad"] . '</td>
                         <td>';
 
-                // Mostrar un ícono para representar el estado del producto
                 echo ($datos["estado"] == 1) ? '<i class="fas fa-check-circle text-success"></i>' : '<i class="fas fa-times-circle text-danger"></i>';
 
                 echo '</td>

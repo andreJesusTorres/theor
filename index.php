@@ -87,10 +87,6 @@ if (isset($_SESSION["login"])) {
                 <a href="https://github.com/andreJesusTorres">
                     <img src="img/github.png" alt="Theor">
                 </a>
-                <form class="d-flex" method="GET">
-                    <input class="form-control me-sm-2" type="search" name="inputBuscar" placeholder="Buscar">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit" name="botonBuscar">Buscar</button>
-                </form>
             </div>
         </div>
     </nav>
@@ -169,18 +165,6 @@ if (isset($_SESSION["login"])) {
             </div>
         </div>
     </section>
-    <?php
-    $conexion = conectar();
-    if ($conexion != null) {
-
-        if (isset($_GET["botonBuscar"])) {
-            $busqueda = $_GET["inputBuscar"];
-            buscarProductos($busqueda);
-        } else {
-            listar();
-        }
-    }
-    ?>
     <footer class="py-5 bg-dark">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; André Jesús Torres</p>
