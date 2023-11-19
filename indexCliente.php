@@ -45,16 +45,10 @@ session_start();
             </div>
             </li>
             </ul>
-            <a href="https://www.instagram.com/___andretorres/">
-                <img src="img/instagram.png" alt="Theor">
-            </a>
-            <a href="https://github.com/andreJesusTorres">
-                <img src="img/github.png" alt="Theor">
-            </a>
             <form class="d-flex" method="GET">
                 <div class="navbar-text me-3">
-                    <i class="fas fa-user-circle fa-lg me-2"></i> <!-- Ícono de la persona -->
-                    <span class="d-none d-lg-inline-block"> <!-- Mostrar texto en pantallas grandes -->
+                    <i class="fas fa-user-circle fa-lg me-2"></i>
+                    <span class="d-none d-lg-inline-block">
                         Bienvenido,
                         <?php echo $_SESSION["login"]["usuario"]; ?>
                     </span>
@@ -140,7 +134,24 @@ session_start();
     </section>
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; André Jesús Torres</p>
+            <div class="row">
+                <div class="col text-center">
+                    <p class="m-0 text-white">
+                        Sígueme en:
+                        <a href="https://www.instagram.com/___andretorres/" class="text-white mx-2" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://github.com/andreJesusTorres" class="text-white mx-2" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/andr%C3%A9-torres-419931235/" class="text-white mx-2"
+                            target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </p>
+                    <p class="m-0 text-white">Copyright &copy; André Jesús Torres</p>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="js/bootstrap.bundle.js"></script>

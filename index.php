@@ -23,17 +23,21 @@ if (isset($_SESSION["login"])) {
     <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
         <div class="container-fluid">
             <img src="img/logo.png" alt="Theor">
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
+
                     <li class="nav-item">
                         <a class="nav-link active mr-3" href="index.php">Home
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                             aria-haspopup="true" aria-expanded="false">Iniciar Sesión</a>
@@ -53,6 +57,7 @@ if (isset($_SESSION["login"])) {
                             </form>
                         </div>
                     </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                             aria-haspopup="true" aria-expanded="false">Registrarse</a>
@@ -81,39 +86,38 @@ if (isset($_SESSION["login"])) {
                         </div>
                     </li>
                 </ul>
-                <a href="https://www.instagram.com/___andretorres/">
-                    <img src="img/instagram.png" alt="Theor">
-                </a>
-                <a href="https://github.com/andreJesusTorres">
-                    <img src="img/github.png" alt="Theor">
-                </a>
             </div>
         </div>
     </nav>
+
     <?php if (isset($guardadoRegistro)): ?>
         <div class="alert alert-dismissible alert-success">
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             <strong>Registro exitoso!</strong> El usuario se registró correctamente.
         </div>
     <?php endif; ?>
+
     <?php if (isset($errorRegistro)): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>Error!</strong> Hubo un problema al realizar el registro.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <?php endif; ?>
+
     <?php if (isset($nombreEnUso)): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>Error!</strong> Ese nombre de usuario está en uso.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <?php endif; ?>
+
     <?php if (isset($caracteres)): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>Error!</strong> El nombre y contraseña deben ser mayores a 5 caracteres.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <?php endif; ?>
+
     <?php if (isset($contraseñasCoincidencia)): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>Error!</strong> Las contraseñas no coinciden.
@@ -127,6 +131,7 @@ if (isset($_SESSION["login"])) {
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <?php endif; ?>
+
     <section class="py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center">
@@ -149,6 +154,7 @@ if (isset($_SESSION["login"])) {
             </div>
         </div>
     </section>
+
     <section class="py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center">
@@ -165,11 +171,32 @@ if (isset($_SESSION["login"])) {
             </div>
         </div>
     </section>
+
+    <?php listar(); ?>
+
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; André Jesús Torres</p>
+            <div class="row">
+                <div class="col text-center">
+                    <p class="m-0 text-white">
+                        Sígueme en:
+                        <a href="https://www.instagram.com/___andretorres/" class="text-white mx-2" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://github.com/andreJesusTorres" class="text-white mx-2" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/andr%C3%A9-torres-419931235/" class="text-white mx-2"
+                            target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </p>
+                    <p class="m-0 text-white">Copyright &copy; André Jesús Torres</p>
+                </div>
+            </div>
         </div>
     </footer>
+
     <script src="js/bootstrap.bundle.js"></script>
 </body>
 
