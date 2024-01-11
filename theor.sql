@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2023 a las 06:49:25
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 11-01-2024 a las 15:29:00
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,16 +30,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `login` (
   `id` int(11) NOT NULL,
   `usuario` varchar(25) NOT NULL,
-  `clave` varchar(25) NOT NULL
+  `correo` varchar(50) NOT NULL,
+  `clave` varchar(25) NOT NULL,
+  `admin` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `login`
 --
 
-INSERT INTO `login` (`id`, `usuario`, `clave`) VALUES
-(4, 'Ignacio Quiroga', '12345'),
-(5, 'André Torres', '12345');
+INSERT INTO `login` (`id`, `usuario`, `correo`, `clave`, `admin`) VALUES
+(4, 'Ignacio Quiroga', 'ignacioq@gmail.com', '12345', 0),
+(5, 'André Torres', 'andre.torres@outlook.com.ar', '12345', 1);
 
 -- --------------------------------------------------------
 
